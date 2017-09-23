@@ -3,22 +3,28 @@ from flask_slacker import Slacker
 
 
 def test_init_app(app, config):
-    slack = Slacker()
+    slacker = Slacker()
 
-    assert 'slack' not in app.extensions
+    assert 'slacker' not in app.extensions
 
-    slack.init_app(app)
+    slacker.init_app(app)
 
-    assert 'slack' in app.extensions
-    assert app.extensions.get('slack') is not None
+    assert 'slacker' in app.extensions
 
 
 def test_init_app_missing_config(app_missing_config):
-    slack = Slacker()
-
-    assert 'slack' not in app_missing_config.extensions
+    slacker = Slacker()
 
     with pytest.raises(Exception) as e:
-        slack.init_app(app_missing_config)
-
+        slacker.init_app(app_missing_config)
         assert 'SLACKER_TOKEN' in e
+
+
+def test_slacker_attributes(app, config):
+    slacker = Slacker()
+    slacker.init_app(app)
+
+    assert 'slacker' in app.extensions
+    assert app.extensions['slacker'] is not None
+    assert slacker.chat is not None
+    assert slacker.users is not None

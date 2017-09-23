@@ -22,18 +22,33 @@ class Slacker(object):
         if app is not None:
             self.init_app(app)
 
-    def init_app(self, app):
+    def init_app(self, app, config=None, session=None):
         """
         Initialize the app in Flask.
         """
         app.config.setdefault('SLACKER_TIMEOUT', DEFAULT_TIMEOUT)
+        app.config.setdefault('SLACKER_HTTP_PROXY', None)
+        app.config.setdefault('SLACKER_HTTPS_PROXY', None)
 
-        if 'SLACKER_TOKEN' not in app.config:
+        if config is None:
+            config = app.config
+
+        if 'SLACKER_TOKEN' not in config:
             raise Exception('Missing SLACKER_TOKEN in your config.')
 
-        token = app.config['SLACKER_TOKEN']
-        timeout = app.config['SLACKER_TIMEOUT']
+        token = config['SLACKER_TOKEN']
+        timeout = config['SLACKER_TIMEOUT']
+        http_proxy = config['SLACKER_HTTP_PROXY']
+        https_proxy = config['SLACKER_HTTPS_PROXY']
+
+        self._slacker = BaseSlacker(token, timeout=timeout, http_proxy=http_proxy,
+                                    https_proxy=https_proxy, session=session)
+
+        # set Slacker attributes
+        attrs = filter(lambda a: '_' not in a, self._slacker.__dir__())
+        for attr in attrs:
+            setattr(self, attr, getattr(self._slacker, attr))
 
         # register application within app
         app.extensions = getattr(app, 'extensions', {})
-        app.extensions['slack'] = BaseSlacker(token, timeout=timeout)
+        app.extensions['slacker'] = self
