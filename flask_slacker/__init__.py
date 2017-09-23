@@ -45,7 +45,7 @@ class Slacker(object):
                                     https_proxy=https_proxy, session=session)
 
         # set Slacker attributes
-        attrs = filter(lambda a: '_' not in a, self._slacker.__dir__())
+        attrs = filter(lambda a: '_' not in a, dir(self._slacker))
         for attr in attrs:
             setattr(self, attr, getattr(self._slacker, attr))
 
