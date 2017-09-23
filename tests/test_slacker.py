@@ -1,4 +1,5 @@
 import pytest
+
 from flask_slacker import Slacker
 
 

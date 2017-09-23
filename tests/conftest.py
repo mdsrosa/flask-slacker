@@ -1,6 +1,5 @@
-from flask import Flask
-
 import pytest
+from flask import Flask
 
 
 class Config(object):
