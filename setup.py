@@ -26,8 +26,9 @@ install_requires = [
 
 test_requires = [
     'pytest >= 3.2.2',
-    'pytest-flake8',
-    'pytest-isort'
+    'pytest-runner >= 2.12.1',
+    'pytest-flake8 >= 0.8.1',
+    'pytest-isort >= 0.1.0'
 ]
 
 
