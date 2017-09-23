@@ -2,6 +2,9 @@ apipkg==1.4
 certifi==2017.7.27.1
 chardet==3.0.4
 click==6.7
+coverage==4.4.1
+coveralls==1.2.0
+docopt==0.6.2
 execnet==1.4.1
 flake8==3.4.1
 Flask==0.12.2
