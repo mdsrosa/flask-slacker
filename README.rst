@@ -33,14 +33,14 @@ To quickly start using Flask-Slacker, simply create a ``Slacker`` instance:
     from flask_slacker import Slacker
 
     app = Flask(__name__)
-    slacker = Slacker(app)
+    slacker = Slacker(app, token='my-token')
 
 Alternatively, if you're using the `application factory`_ pattern:
 
 .. code-block:: python
 
     from flask_slacker import Slacker
-    slacker = Slacker()
+    slacker = Slacker(token='my-token')
 
 and then later call ``init_app`` where you create your application object:
 
