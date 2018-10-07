@@ -14,15 +14,15 @@ __version__ = '0.0.1'
 
 
 class Slacker(object):
-    def __init__(self, app=None):
+    def __init__(self, app=None, token=None):
         """Initialize the Slacker interface.
 
         :param app: Flask application
         """
         if app is not None:
-            self.init_app(app)
+            self.init_app(app, token=token)
 
-    def init_app(self, app, config=None, session=None):
+    def init_app(self, app, config=None, session=None, token=None):
         """
         Initialize the app in Flask.
         """
@@ -33,10 +33,11 @@ class Slacker(object):
         if config is None:
             config = app.config
 
-        if 'SLACKER_TOKEN' not in config:
-            raise Exception('Missing SLACKER_TOKEN in your config.')
+        if token is None and 'SLACKER_TOKEN' not in config:
+            raise Exception('SLACKER_TOKEN not found in your config '
+                            'nor `token` was informed.')
 
-        token = config['SLACKER_TOKEN']
+        token = config['SLACKER_TOKEN'] or token
         timeout = config['SLACKER_TIMEOUT']
         http_proxy = config['SLACKER_HTTP_PROXY']
         https_proxy = config['SLACKER_HTTPS_PROXY']
