@@ -38,7 +38,7 @@ class Slacker(object):
                 "SLACKER_TOKEN not found in your config " "nor `token` was informed."
             )
 
-        token = config["SLACKER_TOKEN"] or token
+        token = token or config["SLACKER_TOKEN"]
         timeout = config["SLACKER_TIMEOUT"]
         http_proxy = config["SLACKER_HTTP_PROXY"]
         https_proxy = config["SLACKER_HTTPS_PROXY"]
