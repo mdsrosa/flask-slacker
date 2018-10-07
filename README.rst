@@ -57,3 +57,26 @@ and then later call ``init_app`` where you create your application object:
         return app
 
 .. _`application factory`: http://flask.pocoo.org/docs/0.10/patterns/appfactories/
+
+Examples
+--------
+
+.. code-block:: python
+
+   from flask import Flask, request
+   from flask_slacker import Slacker
+
+   app = Flask(__name__)
+   slacker = Slacker(app, token='my-token')
+
+   @app.route("/send_notification", methods=["POST"])
+   def send_notification():
+      channel = request.data.get("channel", "#random")
+      username = request.data.get("username")
+      message = request.data.get("message")
+
+      slacker.chat.post_message(channel, message, username=username)
+
+
+   if __name__ == "__name__":
+      app.run(host="0.0.0.0", port=5000)
