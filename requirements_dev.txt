@@ -7,11 +7,11 @@ coveralls==1.2.0
 docopt==0.6.2
 execnet==1.4.1
 flake8==3.4.1
-Flask==0.12.2
+Flask==1.0.2
 idna==2.6
 isort==4.2.15
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2==2.10
 MarkupSafe==1.0
 mccabe==0.6.1
 py==1.4.34
@@ -26,4 +26,4 @@ pytest-runner==2.12.1
 requests==2.18.4
 slacker==0.9.60
 urllib3==1.22
-Werkzeug==0.12.2
+Werkzeug==0.14.1
