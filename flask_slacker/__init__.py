@@ -11,7 +11,7 @@ import os
 from slacker import Slacker as BaseSlacker, DEFAULT_TIMEOUT
 
 
-__version__ = "0.0.1"
+__version__ = "0.0.2"
 
 
 SLACKER_TOKEN = "SLACKER_TOKEN"
