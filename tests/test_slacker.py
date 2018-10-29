@@ -21,7 +21,7 @@ def test_init_app(app, config, app_missing_config):
 def test_init_app_missing_config(app_missing_config):
     slacker = Slacker()
 
-    with pytest.raises(Exception) as e:
+    with pytest.raises(LookupError) as e:
         slacker.init_app(app_missing_config)
         assert "SLACKER_TOKEN" in e
 

@@ -7,10 +7,14 @@
     :copyright: (c) 2017 Matheus Rosa
     :license: MIT, see LICENSE for more details.
 """
+import os
 from slacker import Slacker as BaseSlacker, DEFAULT_TIMEOUT
 
 
 __version__ = "0.0.1"
+
+
+SLACKER_TOKEN = "SLACKER_TOKEN"
 
 
 class Slacker(object):
@@ -33,12 +37,12 @@ class Slacker(object):
         if config is None:
             config = app.config
 
-        if token is None and "SLACKER_TOKEN" not in config:
-            raise Exception(
-                "SLACKER_TOKEN not found in your config " "nor `token` was informed."
+        if token is None and SLACKER_TOKEN not in config:
+            raise LookupError(
+                "SLACKER_TOKEN not found in your config nor `token` argument was informed."
             )
 
-        token = token or config["SLACKER_TOKEN"]
+        token = token or config.get(SLACKER_TOKEN)
         timeout = config["SLACKER_TIMEOUT"]
         http_proxy = config["SLACKER_HTTP_PROXY"]
         https_proxy = config["SLACKER_HTTPS_PROXY"]
