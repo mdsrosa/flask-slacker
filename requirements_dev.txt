@@ -26,4 +26,4 @@ pytest-runner==2.12.1
 requests==2.18.4
 slacker==0.9.60
 urllib3==1.22
-Werkzeug==0.14.1
+Werkzeug==0.15.3
